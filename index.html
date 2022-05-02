@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="theme/theme.css" >
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Alunos
+                            <span class="visually-hidden">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="turmas.html">Turmas</a>
+                    </li>
+              
+                </ul>
+                <!-- Futura versão <form class="d-flex">
+                    <input class="form-control me-sm-2" type="text" placeholder="Search">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form> -->
+            </div>
+        </div>
+    </nav>
+    <h1 class="teste text-center">Tabela de alunos</h1>
+
+
+    <table class="table text-center">
+        <thead class="thead-dark">
+          <tr>
+            <!-- <th scope="col">#</th> -->
+            <th scope="col-3">Id</th>
+            <th scope="col-3">Nome</th>
+            
+            <th scope="col-3">Nome da Turma</th>
+
+
+          </tr>
+        </thead>
+        <tbody class="tableBody">
+         
+        </tbody>
+      </table>
+
+    <script>
+
+        $.ajax({
+            method: "GET",
+            dataType: 'json',
+            url: "https://localhost:44334/api/alunos",
+            success: function (data) {
+                console.log(data);
+                let table = $('.tableBody');
+                data.forEach(element => {
+
+                    let tr = "<tr>" + "<td>" + element['id'] + "</td>" +"<td>" + element['nome'] + "</td>"+ "<td>" + element['turma']['nome'] + "</td>" +"</tr>";
+
+                    table.append(tr);
+
+
+
+
+                });
+            }
+        })
+
+    </script>
+</body>
+
+</html>
